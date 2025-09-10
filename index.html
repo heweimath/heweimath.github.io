@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic GitHub Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #ff7b00;
+            --primary-dark: #e66a00;
+            --primary-light: #ff983d;
+            --bg-color: #f6f8fa;
+            --text-color: #24292e;
+            --card-bg: #ffffff;
+            --border-color: #e1e4e8;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 8px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 24px;
+        }
+        
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        .hero {
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            color: var(--text-color);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: #586069;
+            max-width: 700px;
+            margin: 0 auto 24px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid var(--border-color);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 60px 0 40px;
+            font-size: 2rem;
+            color: var(--text-color);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 12px auto;
+            border-radius: 2px;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+        
+        .project-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+        
+        .project-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .project-content {
+            padding: 20px;
+        }
+        
+        .project-title {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: var(--text-color);
+        }
+        
+        .project-desc {
+            color: #586069;
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+        }
+        
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #586069;
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 16px;
+            margin-top: 16px;
+        }
+        
+        .publications-list {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 60px;
+        }
+        
+        .publication-item {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .publication-item:last-child {
+            border-bottom: none;
+        }
+        
+        .publication-title {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--text-color);
+        }
+        
+        .publication-authors {
+            color: #586069;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+        
+        .publication-meta {
+            display: flex;
+            color: #586069;
+            font-size: 0.85rem;
+            gap: 16px;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 60px;
+            justify-content: center;
+        }
+        
+        .skill-tag {
+            padding: 6px 16px;
+            background-color: var(--primary-light);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        footer {
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 40px 0;
+            text-align: center;
+            color: #586069;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            margin: 20px 0;
+        }
+        
+        .footer-links a {
+            color: #586069;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+            }
+            
+            nav ul {
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 12px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                AcademicProfile
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#publications">Publications</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Profile Picture" class="avatar">
+            <h1>Dr. Alex Johnson</h1>
+            <p>Associate Professor of Computer Science specializing in Machine Learning and Natural Language Processing</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-google-scholar"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+            <a href="#contact" class="btn">Get in Touch</a>
+        </div>
+    </section>
+
+    <div class="container">
+        <h2 class="section-title" id="projects">Research Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Project Image" class="project-img">
+                <div class="project-content">
+                    <h3 class="project-title">Neural Machine Translation</h3>
+                    <p class="project-desc">A deep learning approach to machine translation using transformer architecture with attention mechanisms.</p>
+                    <div class="project-meta">
+                        <span><i class="far fa-calendar-alt"></i> Jan 2022 - Present</span>
+                        <span><i class="fas fa-code-branch"></i> Python, PyTorch</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Project Image" class="project-img">
+                <div class="project-content">
+                    <h3 class="project-title">Sentiment Analysis on Social Media</h3>
+                    <p class="project-desc">Real-time sentiment analysis of social media posts using BERT and RoBERTa models with transfer learning.</p>
+                    <div class="project-meta">
+                        <span><i class="far fa-calendar-alt"></i> Mar 2021 - Dec 2022</span>
+                        <span><i class="fas fa-code-branch"></i> Python, TensorFlow</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Project Image" class="project-img">
+                <div class="project-content">
+                    <h3 class="project-title">AI for Medical Diagnosis</h3>
+                    <p class="project-desc">Developing deep learning models for early detection of diseases from medical imaging data.</p>
+                    <div class="project-meta">
+                        <span><i class="far fa-calendar-alt"></i> Aug 2020 - Present</span>
+                        <span><i class="fas fa-code-branch"></i> Python, Keras, OpenCV</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title" id="publications">Recent Publications</h2>
+        <div class="publications-list">
+            <div class="publication-item">
+                <h3 class="publication-title">Attention Is All You Need: Revisited</h3>
+                <p class="publication-authors">Johnson, A., Smith, B., & Zhang, L.</p>
+                <div class="publication-meta">
+                    <span><i class="fas fa-book"></i> Journal of Machine Learning Research, 2023</span>
+                    <span><i class="fas fa-link"></i> <a href="#">View Paper</a></span>
+                </div>
+            </div>
+            
+            <div class="publication-item">
+                <h3 class="publication-title">Efficient Transformers for Long Document Classification</h3>
+                <p class="publication-authors">Johnson, A., & Brown, C.</p>
+                <div class="publication-meta">
+                    <span><i class="fas fa-book"></i> ACL 2022</span>
+                    <span><i class="fas fa-link"></i> <a href="#">View Paper</a></span>
+                </div>
+            </div>
+            
+            <div class="publication-item">
+                <h3 class="publication-title">Multimodal Learning for Video Understanding</h3>
+                <p class="publication-authors">Wilson, D., Johnson, A., & Lee, M.</p>
+                <div class="publication-meta">
+                    <span><i class="fas fa-book"></i> CVPR 2021</span>
+                    <span><i class="fas fa-link"></i> <a href="#">View Paper</a></span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title" id="skills">Technical Skills</h2>
+        <div class="skills-container">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">PyTorch</span>
+            <span class="skill-tag">TensorFlow</span>
+            <span class="skill-tag">NLP</span>
+            <span class="skill-tag">Computer Vision</span>
+            <span class="skill-tag">Transformers</span>
+            <span class="skill-tag">Data Visualization</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">AWS</span>
+        </div>
+
+        <h2 class="section-title" id="contact">Contact Me</h2>
+        <div style="background-color: var(--card-bg); padding: 30px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 60px;">
+            <p style="text-align: center; margin-bottom: 20px;">Feel free to reach out for collaborations or inquiries</p>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+                <div style="flex: 1; min-width: 250px;">
+                    <h3 style="margin-bottom: 15px; color: var(--text-color);"><i class="fas fa-envelope"></i> Email</h3>
+                    <p>alex.johnson@university.edu</p>
+                </div>
+                <div style="flex: 1; min-width: 250px;">
+                    <h3 style="margin-bottom: 15px; color: var(--text-color);"><i class="fas fa-map-marker-alt"></i> Office</h3>
+                    <p>Department of Computer Science<br>University Building, Room 405<br>123 University Ave, City, State</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-links">
+                <a href="#"><i class="fab fa-github"></i> GitHub</a>
+                <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+                <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                <a href="#"><i class="fab fa-google-scholar"></i> Google Scholar</a>
+            </div>
+            <p>© 2023 Dr. Alex Johnson. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
