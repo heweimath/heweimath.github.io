@@ -1,0 +1,38 @@
+name: Increment Visitor Counter
+
+on:
+  schedule:
+    - cron: '0 */6 * * *' # 每6小时运行一次（UTC时间）。这是“模拟”访问频率，你可以自己调节。
+  workflow_dispatch: # 添加此选项，允许你手动在Actions标签页中触发这个工作流
+
+jobs:
+  update-counter:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository content
+      uses: actions/checkout@v4 # 将代码库拉取到虚拟机
+
+    - name: Read and Increment Counter
+      run: |
+        # 读取counter.txt当前的数字
+        current_count=$(cat counter.txt)
+        # 显示当前数字（用于日志调试）
+        echo "Current count: $current_count"
+        # 将数字+1
+        new_count=$((current_count + 1))
+        # 将新数字写回counter.txt文件
+        echo $new_count > counter.txt
+        # 显示新数字（用于日志调试）
+        echo "New count: $new_count"
+
+    - name: Commit and Push the updated counter
+      run: |
+        git config --global user.name "GitHub Actions Bot"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add counter.txt
+        git commit -m " chore: Increment visitor counter to $(cat counter.txt) [skip ci]"
+        git push
+      env:
+        # 使用刚才设置的Secret令牌来进行推送认证
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
